@@ -1,0 +1,190 @@
+#' @title Multielement Regulatory Data Extracting
+#' @description  Locate the experimental Multielement regulatory data among biological elements in regional Heterogeneous network which is integrated from a wide range of bioinformatics databases.
+#'
+#' @param transcriptomeList a vector consist of transcriptome including circRNA, lncRNA, miRNA, mRNA IDs.
+#' @param regulationType character string naming the type of regulation which can be located including "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" and "circRNA-miRNA-mRNA-pathway".
+#' @param allRegulation logical value indicates locating all related regulations from the storage or internal regulations between input elements.
+#'
+#' @examples
+#' multieleRegulation(transcriptomeList = c("2309", "3838", "ENSG00000259366", "MIMAT0000255"), regulationType = "lncRNA-miRNA-mRNA",  allRegulation = FALSE)
+#' @export
+multieleRegulation = function(transcriptomeList = NULL, regulationType = c("circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway"), allRegulation = FALSE) {
+
+  if(is.null(transcriptomeList)){
+    return("Please enter at least one element......")
+  }
+
+  if(!(regulationType %in% c("circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway", "miRNA-mRNA-pathway"))){
+    return("Please choose a regulation type from circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA-pathway, circRNA-miRNA-mRNA-pathway")
+  }
+  load(system.file("extdata", "netelements.rda", package = "NetLCP"))
+  if(!all(transcriptomeList %in% NETELEMENTS)){
+    print(paste0("Filtering the missing input transcriptome in input network......"))
+    print(paste0(paste0(transcriptomeList[!(transcriptomeList %in% NETELEMENTS)], collapse = "/"), " have been filtered....."))
+    transcriptomeList = transcriptomeList[transcriptomeList %in% NETELEMENTS]
+    print(paste0("Now remain ", length(transcriptomeList)))
+  }
+
+  print("Multielement regulation extraction begins, please wait while we do something......")
+  # setwd(as.character(utils::installed.packages()[,"LibPath"][names(utils::installed.packages()[,"LibPath"]) == "NetLCP"]))
+  load(system.file("extdata", "extraction.rda", package = "NetLCP"))
+
+  if(regulationType == "circRNA-miRNA-mRNA"){
+    REG =  REG %>% filter(regType == "circRNA-miRNA" | regType == "miRNA-mRNA")
+    if(allRegulation == TRUE){
+      ExtractedData = REG[REG$node1 %in% transcriptomeList | REG$node2 %in% transcriptomeList,]
+      if("circRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "circRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        intersect_miRNA = intersect(ExtractedData_1$node1, ExtractedData_2$node1)
+        if(length(intersect_miRNA) > 0){
+          ExtractedData = ExtractedData[ExtractedData$node1 %in% intersect_miRNA, ]
+          return(ExtractedData)
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }else{
+      ExtractedData = REG[REG$node1 %in% transcriptomeList & REG$node2 %in% transcriptomeList,]
+      if("circRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType){
+        return(ExtractedData)
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }
+  }else if(regulationType == "lncRNA-miRNA-mRNA"){
+    REG =  REG %>% dplyr::filter(regType == "lncRNA-miRNA" | regType == "miRNA-mRNA")
+    if(allRegulation == TRUE){
+      ExtractedData = REG[REG$node1 %in% transcriptomeList | REG$node2 %in% transcriptomeList,]
+      if("lncRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "lncRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        intersect_miRNA = intersect(ExtractedData_1$node1, ExtractedData_2$node1)
+        if(length(intersect_miRNA) > 0){
+          ExtractedData = ExtractedData[ExtractedData$node1 %in% intersect_miRNA, ]
+          return(ExtractedData)
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }else{
+      ExtractedData = REG[REG$node1 %in% transcriptomeList & REG$node2 %in% transcriptomeList,]
+      if("lncRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType){
+        return(ExtractedData)
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }
+  }else if(regulationType == "lncRNA-miRNA-mRNA-pathway"){
+    REG =  REG %>% filter(regType == "lncRNA-miRNA" | regType == "miRNA-mRNA" | regType == "mRNA-pathway")
+    if(allRegulation == TRUE){
+      ExtractedData = REG[REG$node1 %in% transcriptomeList | REG$node2 %in% transcriptomeList,]
+      if("lncRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "lncRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        ExtractedData_3 =  ExtractedData %>% dplyr::filter(regType == "mRNA-pathway")
+        intersect_miRNA = intersect(ExtractedData_1$node1, ExtractedData_2$node1)
+        if(length(intersect_miRNA) > 0){
+          ExtractedData_4 = ExtractedData[ExtractedData$node1 %in% intersect_miRNA, ]
+          intersect_mRNA = intersect(ExtractedData_4$node2, ExtractedData_3$node2)
+          if(length(intersect_mRNA) > 0){
+            ExtractedData = rbind(ExtractedData_4[ExtractedData_4$node2 %in% intersect_mRNA], ExtractedData_3[ExtractedData_3$node2 %in% intersect_mRNA])
+            return(ExtractedData)
+          }else{
+            return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+          }
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }else{
+      ExtractedData = REG[REG$node1 %in% transcriptomeList & REG$node2 %in% transcriptomeList,]
+      if("lncRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "lncRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        ExtractedData_3 =  ExtractedData %>% dplyr::filter(regType == "mRNA-pathway")
+        intersect_mRNA = intersect(ExtractedData_2$node2, ExtractedData_3$node2)
+        if(length(intersect_mRNA) > 0){
+          ExtractedData = rbind(ExtractedData_1, ExtractedData[ExtractedData$node2 %in% intersect_mRNA, ])
+          return(ExtractedData)
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }
+  }else if(regulationType == "circRNA-miRNA-mRNA-pathway"){
+    REG =  REG %>% filter(regType == "circRNA-miRNA" | regType == "miRNA-mRNA" | regType == "mRNA-pathway")
+    if(allRegulation == TRUE){
+      ExtractedData = REG[REG$node1 %in% transcriptomeList | REG$node2 %in% transcriptomeList,]
+      if("circRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "circRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        ExtractedData_3 =  ExtractedData %>% dplyr::filter(regType == "mRNA-pathway")
+        intersect_miRNA = intersect(ExtractedData_1$node1, ExtractedData_2$node1)
+        if(length(intersect_miRNA) > 0){
+          ExtractedData_4 = ExtractedData[ExtractedData$node1 %in% intersect_miRNA, ]
+          intersect_mRNA = intersect(ExtractedData_4$node2, ExtractedData_3$node2)
+          if(length(intersect_mRNA) > 0){
+            ExtractedData = rbind(ExtractedData_4[ExtractedData_4$node2 %in% intersect_mRNA], ExtractedData_3[ExtractedData_3$node2 %in% intersect_mRNA])
+            return(ExtractedData)
+          }else{
+            return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+          }
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }else{
+      ExtractedData = REG[REG$node1 %in% transcriptomeList & REG$node2 %in% transcriptomeList,]
+      if("circRNA-miRNA" %in% ExtractedData$regType & "miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "circRNA-miRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        ExtractedData_3 =  ExtractedData %>% dplyr::filter(regType == "mRNA-pathway")
+        intersect_mRNA = intersect(ExtractedData_2$node2, ExtractedData_3$node2)
+        if(length(intersect_mRNA) > 0){
+          ExtractedData = rbind(ExtractedData_1, ExtractedData[ExtractedData$node2 %in% intersect_mRNA, ])
+          return(ExtractedData)
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }
+  }else if(regulationType == "miRNA-mRNA-pathway"){
+    REG =  REG %>% filter(regType == "miRNA-mRNA" | regType == "mRNA-pathway")
+    if(allRegulation == TRUE){
+      ExtractedData = REG[REG$node1 %in% transcriptomeList | REG$node2 %in% transcriptomeList,]
+      if("miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        ExtractedData_1 = ExtractedData %>% dplyr::filter(regType == "miRNA-mRNA")
+        ExtractedData_2 = ExtractedData %>% dplyr::filter(regType == "mRNA-pathway")
+        intersect_mRNA = intersect(ExtractedData_1$node2, ExtractedData_2$node1)
+        if(length(intersect_mRNA) > 0){
+          ExtractedData = ExtractedData[(ExtractedData$node1 %in% intersect_mRNA) | (ExtractedData$node2 %in% intersect_mRNA), ]
+          return(ExtractedData)
+        }else{
+          return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+        }
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }else{
+      ExtractedData = REG[REG$node1 %in% transcriptomeList & REG$node2 %in% transcriptomeList,]
+      if("miRNA-mRNA" %in% ExtractedData$regType & "mRNA-pathway" %in% ExtractedData$regType){
+        return(ExtractedData)
+      }else{
+        return("Sorry, search result is empty, please try to check the ID types of input transcriptome or the regulationtype......")
+      }
+    }
+  }
+}

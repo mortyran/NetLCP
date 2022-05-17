@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Binary Regulatory in Local Heterogeneous network</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for binaryRegulation {NetLCP}"><tr><td>binaryRegulation {NetLCP}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Binary Regulatory in Local Heterogeneous network</h2>
+
+<h3>Description</h3>
+
+<p>Locate the experimental binary regulatory data among biological elements in regional Heterogeneous network which is integrated from a wide range of bioinformatics databases.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>binaryRegulation(transcriptomeList, regulationType, allRegulation)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>transcriptomeList</code></td>
+<td>
+<p>a vector consist of transcriptome including circRNA, lncRNA, miRNA ,mRNA or KEGG/Reactome/Wikipathway pathway IDs.</p>
+</td></tr>
+<tr valign="top"><td><code>regulationType</code></td>
+<td>
+<p>character string naming the type of regulation which can be located including &quot;circRNA-miRNA&quot;, &quot;lncRNA-miRNA&quot;, &quot;lncRNA-mRNA&quot;, &quot;miRNA-mRNA&quot;, &quot;miRNA-pathway&quot;, &quot;mRNA-pathway&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>allRegulation</code></td>
+<td>
+<p>a logical value indicates locating all related regulations from the storage or internal regulations between input elements.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The dataframe of regulatory data with the colnames of Node1, Node2, Datasoure and RegulationType.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+binaryRegulation(transcriptomeList = c("2309", "3838", "MIMAT0000255"), regulationType = "miRNA-mRNA",  allRegulation = FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>NetLCP</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

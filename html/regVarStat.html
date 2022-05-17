@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Regulatory mutation Statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for regVarStat {NetLCP}"><tr><td>regVarStat {NetLCP}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Regulatory mutation Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Regulatory mutation Statistics
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>regVarStat(regVar, regulationType, selectNode)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>regVar</code></td>
+<td>
+<p>the standard out of the function regVarDetection.</p>
+</td></tr>
+<tr valign="top"><td><code>regulationType</code></td>
+<td>
+<p>a character representing the regulation data type, it should be &quot;miRNA-mRNA&quot;, &quot;miRNA-mRNA-pathway&quot;, &quot;lncRNA-miRNA-mRNA&quot;, &quot;circRNA-miRNA-mRNA&quot;, &quot;lncRNA-miRNA-mRNA-pathway&quot; or &quot;circRNA-miRNA-mRNA-pathway&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>selectNode</code></td>
+<td>
+<p>select a or a set of nodes to visulize in the network.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Regulatory mutation Statistics
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+regVarStat(regVar = NULL, regulationType = "lncRNA-miRNA-mRNA", selectNode = sampleData)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>NetLCP</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

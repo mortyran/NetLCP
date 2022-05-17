@@ -1,2 +1,2 @@
 # NetLCP
-Customize prioritization of regulatory elements in heterogeneous network with mutation 'switch' detection.
+Customize prioritization of regulatory elements in heterogenous network with mutation 'switch' detection.

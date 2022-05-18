@@ -3,7 +3,7 @@
 # Install
 `devtools::install_github("mortyran/NetLCP")`
 # Tutorial
-The complete tutorial of command and GUI is on the github.
+The complete tutorial is on the https://mortyran.github.io/NetLCP/.
 # Contact
 Mingyu Ran
 rmyhandsome@163.com

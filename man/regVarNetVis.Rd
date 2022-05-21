@@ -1,6 +1,6 @@
 \name{regVarNetVis}
 \alias{regVarNetVis}
-\title{Regulatory mutations Network Visual Function}
+\title{Regulatory variants Network Visual Function}
 \usage{regVarNetVis(regVar, regulationType, selectNode)}
 \arguments{
   \item{regVar}{the standard out of the function regVarDetection.}
@@ -8,10 +8,10 @@
   \item{selectNode}{select a or a set of nodes to visulize in the network.}
 }
 \value{
-Regulatory mutations network visualization
+Regulatory variants network visualization
 }
 \description{
-Regulatory mutations network visualization
+Regulatory variants network visualization
 }
 \examples{
 regVarNetVis(regVar = NULL, regulationType = "miRNA-mRNA-pathway", selectNode = c("MIMAT0000717","6774", "hsa04550"))

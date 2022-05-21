@@ -70,9 +70,9 @@ NetLCPGUI = function(){
                                                  "miRNA-pathway" = "miRNA-pathway",
                                                  "mRNA-pathway" = "mRNA-pathway", "miRNA-mRNA-pathway" = "miRNA-mRNA-pathway",
                                                  "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway" = "circRNA-miRNA-mRNA-pathway")),
-                             shiny::radioButtons("extract_range", label = shiny::h3("Extraction Range"),
-                                   choices = list("All associated regulation in storage" = "TRUE", "Internal regulation between input elments" = "FALSE"),
-                                   selected = "TRUE"),
+                             shiny::radioButtons("extract_range", label = shiny::h3("Range"),
+                                   choices = list("Internal regulation between input elements" = "FALSE", "All associated regulation in storage" = "TRUE"),
+                                   selected = "FALSE"),
                       shinyjs::useShinyjs(),
                       shiny::actionButton("extract_action", label = "Inspect", style = "position: relative; left: 83%;")),
          shiny::mainPanel(
@@ -138,10 +138,10 @@ NetLCPGUI = function(){
        )
      ),
      ###############################################.
-     ## Binding mutations regulation
+     ## Binding variants regulation
      ###############################################
      shiny::tabPanel(
-       title = "Binding sites mutations",
+       title = "Binding sites variants",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by a group of element IDs"), value = NULL),
@@ -296,12 +296,12 @@ NetLCPGUI = function(){
 
       if(Extr_type_input() == "circRNA-miRNA-mRNA" | Extr_type_input() == "lncRNA-miRNA-mRNA" | Extr_type_input() == "miRNA-mRNA-pathway" | Extr_type_input() == "lncRNA-miRNA-mRNA-pathway" | Extr_type_input() == "circRNA-miRNA-mRNA-pathway"){
         output$extract_out = shiny::renderTable({
-          Extr_output$output = multieleRegulation(transcriptomeList = Extr_input(), regulationType = Extr_type_input(),  allRegulation = Extr_range())
+          Extr_output$output = multieleRegulation(elementList = Extr_input(), regulationType = Extr_type_input(),  allRegulation = Extr_range())
           Extr_output$output
         })
       }else{
         output$extract_out = shiny::renderTable({
-          Extr_output$output = binaryRegulation(transcriptomeList = Extr_input(), regulationType = Extr_type_input(),  allRegulation = Extr_range())
+          Extr_output$output = binaryRegulation(elementList = Extr_input(), regulationType = Extr_type_input(),  allRegulation = Extr_range())
           Extr_output$output
         })
       }
@@ -314,12 +314,12 @@ NetLCPGUI = function(){
               input$PR_filter_input_text
             })
             shiny::observeEvent(input$PR_filter_action,{
-              output$PR_net = visNetwork::renderVisNetwork({regNetVis(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = unlist(strsplit(PR_filter_input(), "\\s+")), netLayout = input$PR_Net_layout)})
               output$PR_stat = plotly::renderPlotly({regStat(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = unlist(strsplit(PR_filter_input(), "\\s+")))})
+              output$PR_net = visNetwork::renderVisNetwork({regNetVis(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = unlist(strsplit(PR_filter_input(), "\\s+")), netLayout = input$PR_Net_layout)})
             })
             # netvis
-            output$PR_net = visNetwork::renderVisNetwork({regNetVis(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = NULL, netLayout = input$PR_Net_layout)})
             output$PR_stat = plotly::renderPlotly({regStat(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = NULL)})
+            output$PR_net = visNetwork::renderVisNetwork({regNetVis(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectNode = NULL, netLayout = input$PR_Net_layout)})
 
             ###### Elements eQTLs regulation ######
             # Extr_output$output
@@ -330,15 +330,15 @@ NetLCPGUI = function(){
               input$ER_filter_input_text
             })
             shiny::observeEvent(input$ER_filter_action,{
-              output$ER_net = visNetwork::renderVisNetwork({eQTLsNetVis(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = unlist(strsplit(ER_filter_input(), "\\s+")), netLayout = input$ER_Net_layout)})
               output$ER_stat_single = plotly::renderPlotly({eQTLsSingleEleStat(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = unlist(strsplit(ER_filter_input(), "\\s+")))})
               output$ER_stat_reg = plotly::renderPlotly({eQTLsRegStat(regData = Extr_output$output, eQTLsData = eqtls_out$output, regulationType = Extr_type_input(), filterDegree = input$ER_node_degree, selectNode = unlist(strsplit(ER_filter_input(), "\\s+")))})
+              output$ER_net = visNetwork::renderVisNetwork({eQTLsNetVis(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = unlist(strsplit(ER_filter_input(), "\\s+")), netLayout = input$ER_Net_layout)})
             })
-            output$ER_net = visNetwork::renderVisNetwork({eQTLsNetVis(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = NULL, netLayout = input$ER_Net_layout)})
             output$ER_stat_single = plotly::renderPlotly({eQTLsSingleEleStat(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = NULL)})
             output$ER_stat_reg = plotly::renderPlotly({eQTLsRegStat(regData = Extr_output$output, eQTLsData = eqtls_out$output, regulationType = Extr_type_input(), filterDegree = input$ER_node_degree, selectNode = NULL)})
+            output$ER_net = visNetwork::renderVisNetwork({eQTLsNetVis(regData = Extr_output$output, eQTLsData = eqtls_out$output, filterDegree = input$ER_node_degree, selectNode = NULL, netLayout = input$ER_Net_layout)})
 
-            ###### regulation mutations ######
+            ###### regulation variants ######
             regvar_out = shiny::reactiveValues(output = NULL)
             regvar_out$output = regVarDetection(regData = Extr_output$output,regulationType = Extr_type_input())
 
@@ -346,8 +346,9 @@ NetLCPGUI = function(){
               input$BR_filter_input_text
             })
             shiny::observeEvent(input$BR_filter_action,{
-              output$BR_net = visNetwork::renderVisNetwork({regVarNetVis(regVar = regvar_out$output, regulationType = Extr_type_input(), selectNode = unlist(strsplit(BR_filter_input(), "\\s+")))})
               output$BR_stat_reg = plotly::renderPlotly({regVarStat(regVar = regvar_out$output, regulationType = Extr_type_input(), selectNode = unlist(strsplit(BR_filter_input(), "\\s+")))})
+              output$BR_net = visNetwork::renderVisNetwork({regVarNetVis(regVar = regvar_out$output, regulationType = Extr_type_input(), selectNode = unlist(strsplit(BR_filter_input(), "\\s+")))})
+
             })
         }
       })

@@ -1,5 +1,5 @@
-#' @title Regulatory mutations Network Visual Function
-#' @description Regulatory mutations network visualization
+#' @title Regulatory variants Network Visual Function
+#' @description Regulatory variants network visualization
 #'
 #' @param regVar the standard out of the function regVarDetection.
 #' @param regulationType a character representing the regulation data type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".

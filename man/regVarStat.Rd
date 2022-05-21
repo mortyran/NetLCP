@@ -1,6 +1,6 @@
 \name{regVarStat}
 \alias{regVarStat}
-\title{Regulatory mutation Statistics}
+\title{Regulatory variants Statistics}
 \usage{regVarStat(regVar, regulationType, selectNode)}
 \arguments{
   \item{regVar}{the standard out of the function regVarDetection.}
@@ -8,10 +8,10 @@
   \item{selectNode}{select a or a set of nodes to visulize in the network.}
 }
 \value{
-Regulatory mutation Statistics
+Regulatory variants Statistics
 }
 \description{
-Regulatory mutation Statistics
+Regulatory variants Statistics
 }
 \examples{
 regVarStat(regVar = NULL, regulationType = "lncRNA-miRNA-mRNA", selectNode = sampleData)

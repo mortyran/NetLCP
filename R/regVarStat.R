@@ -1,5 +1,5 @@
-#' @title Regulatory mutation Statistics
-#' @description Regulatory mutation Statistics
+#' @title Regulatory variant Statistics
+#' @description Regulatory variant Statistics
 #'
 #' @param regVar the standard out of the function regVarDetection.
 #' @param regulationType a character representing the regulation data type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".

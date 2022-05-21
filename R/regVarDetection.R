@@ -1,5 +1,5 @@
-#' @title Mutations on regulations Detection
-#' @description Detect the Mutations on regulations, which are integrated from LnCeVar and miRNASNPv3.
+#' @title Variants on regulations Detection
+#' @description Detect the Variants on regulations, which are integrated from LnCeVar and miRNASNPv3.
 #'
 #' @param regData the dataframe of output from binaryRegulation and multieleRegulation functions,
 #'                accepting miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA, circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA-pathway, circRNA-miRNA-mRNA-pathway.

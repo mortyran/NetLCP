@@ -1,6 +1,6 @@
 \name{BioRegElePrioritization}
 \alias{BioRegElePrioritization}
-\title{Regulatory Biological Elements Prioritization}
+\title{Regulatory Elements Prioritization}
 \usage{BioRegElePrioritization(transcriptomeList, prioType, empiricalPvalue)}
 \arguments{
   \item{transcriptomeList}{a vector consist transcriptome including circRNA, lncRNA, miRNA or mRNA.}
@@ -11,7 +11,7 @@
 a dataframe of prioritizations.
 }
 \description{
-Prioritize the biological regulatory elements through decoding the heterogeneous network according to input transcriptome.
+Prioritize the regulatory elements through decoding the heterogeneous network according to input transcriptome.
 }
 \examples{
 BioRegElePrioritization(transcriptomeList = c("2309", "3838", "MIMAT0000255"),

@@ -3,7 +3,7 @@
 #'
 #' @param regData the standard out of the function binaryRegulationExtract or multieleRegulationExtract.
 #' @param eQTLsData the standard out of the function eQTLsExtract.
-#' @param regulationType a character representing the extracted regulation data type, it should be one of "circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway".
+#' @param regulationType a character representing the CREs type, it should be one of "circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway".
 #' @param filterDegree an integer for filtering the nodes.
 #' @param selectNode select a or a set of nodes to perform statistics.
 #'
@@ -35,21 +35,26 @@ eQTLsRegStat = function(regData = NULL, eQTLsData = NULL, regulationType = NULL,
       regulation = A1[,c(2,1)] %>% dplyr::left_join(A2, by = "node2") %>% dplyr::left_join(A3, by = "node3") %>% dplyr::distinct() %>% na.omit()
       regulation$reg = paste(regulation$node1, regulation$node2, regulation$node3, regulation$node4, sep = "-")
 
-      eqtls_stat = table(eqtls$Elements, eqtls$RegType)
-      if(ncol(eqtls_stat) == 2){
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        regulation$trans_eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
-          sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }else{
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }
+      eqtls_stat = table(eqtls$Elements)
+      regulation$eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+        sum(eqtls_stat[rownames(eqtls_stat) %in% x])
+      })
+      return(regulation %>% dplyr::arrange(desc(eQTLs)) %>% plotly::plot_ly(x = ~reg, y = ~eQTLs, type = 'bar', name = 'eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation', categoryorder = "trace"), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+
+      # if(ncol(eqtls_stat) == 2){
+      #   regulation$eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+      #     sum(eqtls_stat[rownames(eqtls_stat) %in% x])
+      #   })
+      #   regulation$trans_eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+      #     sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
+      #   })
+      #   return(regulation %>% plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }else{
+      #   regulation$cis_eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+      #     sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+      #   })
+      #   return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }
     }
 
   }else if(regulationType == "lncRNA-miRNA-mRNA" | regulationType == "circRNA-miRNA-mRNA"){
@@ -60,21 +65,27 @@ eQTLsRegStat = function(regData = NULL, eQTLsData = NULL, regulationType = NULL,
       regulation = A1[,c(2,1)] %>% left_join(A2, by = "node2") %>% dplyr::distinct() %>% na.omit()
       regulation$reg = paste(regulation$node1, regulation$node2, regulation$node3, sep = "-")
 
-      eqtls_stat = table(eqtls$Elements, eqtls$RegType)
-      if(ncol(eqtls_stat) == 2){
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        regulation$trans_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }else{
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }
+      eqtls_stat = table(eqtls$Elements)
+      regulation$eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+        sum(eqtls_stat[rownames(eqtls_stat) %in% x])
+      })
+      return(regulation %>% dplyr::arrange(desc(eQTLs)) %>% plotly::plot_ly(x = ~reg, y = ~eQTLs, type = 'bar', name = 'eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation', categoryorder = "trace"), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      #
+      # eqtls_stat = table(eqtls$Elements, eqtls$RegType)
+      # if(ncol(eqtls_stat) == 2){
+      #   regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+      #     sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+      #   })
+      #   regulation$trans_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+      #     sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
+      #   })
+      #   return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }else{
+      #   regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+      #     sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+      #   })
+      #   return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }
 
     }
 
@@ -86,41 +97,53 @@ eQTLsRegStat = function(regData = NULL, eQTLsData = NULL, regulationType = NULL,
       regulation = A1 %>% dplyr::left_join(A2, by = "node2") %>% dplyr::distinct() %>% na.omit()
       regulation$reg = paste(regulation$node1, regulation$node2, regulation$node3, sep = "-")
 
-      eqtls_stat = table(eqtls$Elements, eqtls$RegType)
-      if(ncol(eqtls_stat) == 2){
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        regulation$trans_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }else{
-        regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }
+      eqtls_stat = table(eqtls$Elements)
+      regulation$eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+        sum(eqtls_stat[rownames(eqtls_stat) %in% x])
+      })
+      return(regulation %>% dplyr::arrange(desc(eQTLs)) %>% plotly::plot_ly(x = ~reg, y = ~eQTLs, type = 'bar', name = 'eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation', categoryorder = "trace"), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+#
+#       eqtls_stat = table(eqtls$Elements, eqtls$RegType)
+#       if(ncol(eqtls_stat) == 2){
+#         regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+#           sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+#         })
+#         regulation$trans_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+#           sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
+#         })
+#         return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+#       }else{
+#         regulation$cis_eQTLs = apply(regulation[,c(1,2,3)], 1, function(x){
+#           sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+#         })
+#         return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+#       }
     }
   }else{
     regulation = regData[,c(1,2)] %>% dplyr::distinct() %>% na.omit()
     if(nrow(regulation) > 0){
-      eqtls_stat = table(eqtls$Elements, eqtls$RegType)
-      if(ncol(eqtls_stat) == 2){
-        regulation$cis_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        regulation$trans_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
-          sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
-        })
-        regulation$reg = paste(regulation$node1, regulation$node2, sep = "-")
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }else{
-        regulation$cis_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
-          sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
-        })
-        return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'Count'), barmode = 'stack'))
-      }
+      eqtls_stat = table(eqtls$Elements)
+      regulation$eQTLs = apply(regulation[,c(1,2,3,4)], 1, function(x){
+        sum(eqtls_stat[rownames(eqtls_stat) %in% x])
+      })
+      return(regulation %>% dplyr::arrange(desc(eQTLs)) %>% plotly::plot_ly(x = ~reg, y = ~eQTLs, type = 'bar', name = 'eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation', categoryorder = "trace"), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+
+      # eqtls_stat = table(eqtls$Elements, eqtls$RegType)
+      # if(ncol(eqtls_stat) == 2){
+      #   regulation$cis_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
+      #     sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+      #   })
+      #   regulation$trans_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
+      #     sum(eqtls_stat[,2][rownames(eqtls_stat) %in% x])
+      #   })
+      #   regulation$reg = paste(regulation$node1, regulation$node2, sep = "-")
+      #   return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::add_trace(y = ~trans_eQTLs, name = 'trans-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }else{
+      #   regulation$cis_eQTLs = apply(regulation[,c(1,2)], 1, function(x){
+      #     sum(eqtls_stat[,1][rownames(eqtls_stat) %in% x])
+      #   })
+      #   return(plotly::plot_ly(regulation, x = ~reg, y = ~cis_eQTLs, type = 'bar', name = 'cis-eQTLs') %>% plotly::layout(xaxis = list(title = 'Regulation'), yaxis = list(title = 'eQTLs'), barmode = 'stack'))
+      # }
     }
   }
 }

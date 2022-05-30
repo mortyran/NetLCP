@@ -21,9 +21,9 @@ dataInitialize = function(){
   }else if(file.exists(system.file("extdata", "extraction.rda", package = "NetLCP"))){
     return("Data initialization has been finished!")
   }else{
-    print("NetLCP initializing, please be patient while we do something......")
+    print("NetLCP initializing, please be patient while we do something, manually dowloading data is recommended (see tutorial)......")
     fileUrl = "http://hainmu-biobigdata.com/NetLCP/NetLCPData.tar.gz"
-    utils::download.file(url = fileUrl, destfile = system.file("extdata", "NetLCPData.tar.gz", package = "NetLCP"))
+    utils::download.file(url = fileUrl, destfile = paste0(system.file("extdata", package = "NetLCP"), "/NetLCPData.tar.gz"))
     utils::untar(paste0(filePath, "/NetLCPData.tar.gz"), exdir = filePath)
     file.remove(paste0(filePath, "/NetLCPData.tar.gz"))
     if(file.exists(system.file("extdata", "extraction.rda", package = "NetLCP"))){

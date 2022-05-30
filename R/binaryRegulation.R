@@ -1,9 +1,9 @@
-#' @title Binary Regulatory in Local Heterogeneous network
-#' @description Locate the experimental binary regulatory data among biological elements in regional Heterogeneous network which is integrated from a wide range of bioinformatics databases.
+#' @title Binary CREs in Local Heterogeneous Network
+#' @description Locate the binary CREs in regional Heterogeneous network which are experimentally verified.
 #'
 #' @param elementList a vector consist of elements including circRNA, lncRNA, miRNA ,mRNA or KEGG/Reactome/Wikipathway pathway IDs.
 #' @param regulationType character string naming the type of regulation which can be located including "circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway".
-#' @param allRegulation logical value indicates locating all related regulations from the storage or internal regulations between input elements.
+#' @param allRegulation a logical value indicates locating all related CREs from the storage (TRUE) or internal CREs between input elements (FALSE).
 #'
 #' @examples
 #' binaryRegulation(elementList = c("2309", "3838", "MIMAT0000255"), regulationType = "miRNA-mRNA",  allRegulation = FALSE)

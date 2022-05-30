@@ -17,7 +17,8 @@ Imports:
     bslib,
     Rcpp,
     RcppEigen,
-    crayon
+    crayon,
+    shinyjs
 Description: This tool is for prioritizing combinations of regulatory elements in the heterogeneous network with variant ‘switches’ detection through input mRNA/miRNA.
 License: GPL (>=2)
 Encoding: UTF-8

@@ -1,6 +1,6 @@
 Package: NetLCP
 Type: Package
-Title: Customizing prioritization of regulatory elements in heterogeneous network with variant switch detection
+Title: Prioritizing combinations of regulatory elements in the heterogeneous network with variant ‘switches’ detection
 Version: 1.0.0
 Author: Ming-Yu Ran
 Maintainer: Ming-Yu Ran <rmyhandsome@163.com>
@@ -18,7 +18,7 @@ Imports:
     Rcpp,
     RcppEigen,
     crayon
-Description: This tool is for customizing prioritization of regulatory elements in heterogeneous network with variant switch detection through input mRNA/miRNA.
+Description: This tool is for prioritizing combinations of regulatory elements in the heterogeneous network with variant ‘switches’ detection through input mRNA/miRNA.
 License: GPL (>=2)
 Encoding: UTF-8
 RoxygenNote: 7.1.2

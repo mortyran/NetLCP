@@ -1,8 +1,8 @@
-#' @title Regulatory variant Statistics
-#' @description Regulatory variant Statistics
+#' @title Variant 'switches' Statistics
+#' @description Variant 'switches' Statistics
 #'
 #' @param regVar the standard out of the function regVarDetection.
-#' @param regulationType a character representing the regulation data type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
+#' @param regulationType a character representing the CREs type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
 #' @param selectNode select a set of nodes to visualize in the network.
 #'
 #' @examples

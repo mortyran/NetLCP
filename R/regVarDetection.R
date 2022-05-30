@@ -1,9 +1,9 @@
-#' @title Variants on regulations Detection
-#' @description Detect the Variants on regulations, which are integrated from LnCeVar and miRNASNPv3.
+#' @title Variant 'switches' in CREs Detection
+#' @description Detect the Variant 'switches' in CREs.
 #'
 #' @param regData the dataframe of output from binaryRegulation and multieleRegulation functions,
 #'                accepting miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA, circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA-pathway, circRNA-miRNA-mRNA-pathway.
-#' @param regulationType a character representing the extracted regulation data type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
+#' @param regulationType a character representing the CREs type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
 #' @examples
 #' regVarDetection(regData = NULL)
 #' @export

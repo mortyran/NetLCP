@@ -1,5 +1,5 @@
-#' @title biological elements of regulation statistics
-#' @description biological elements of regulation statistics
+#' @title biological elements of CREs statistics
+#' @description biological elements of CREs statistics
 #'
 #' @param regData the standard out of the function binaryRegulation or multieleRegulation.
 #' @param filterDegree an integer for filtering the nodes.

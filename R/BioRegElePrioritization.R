@@ -1,5 +1,5 @@
-#' @title Regulatory Biological Elements Prioritization.
-#' @description Prioritize the biological regulatory elements through decoding the heterogeneous network according to input transcriptome.
+#' @title Regulatory Elements Prioritization.
+#' @description Prioritize the regulatory elements through decoding the heterogeneous network according to input transcriptome.
 #'
 #' @param transcriptomeList a vector consist transcriptome including circRNA, lncRNA, miRNA or mRNA.
 #' @param prioType character string naming the prioritizing element types including circRNA, lncRNA, KEGG, Reactome, Wikipathway.

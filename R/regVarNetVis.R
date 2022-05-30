@@ -1,8 +1,8 @@
-#' @title Regulatory variants Network Visual Function
-#' @description Regulatory variants network visualization
+#' @title Variant 'switches' Network Visualization
+#' @description Variant 'switches' network visualization
 #'
 #' @param regVar the standard out of the function regVarDetection.
-#' @param regulationType a character representing the regulation data type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
+#' @param regulationType a character representing the CREs type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
 #' @param selectNode select a set of nodes to visualize in the network.
 #'
 #' @examples

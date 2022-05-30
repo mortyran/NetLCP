@@ -58,7 +58,7 @@ NetLCPGUI = function(){
      ## local Regulation
      ###############################################
      shiny::tabPanel(
-       title = "Local Regulation",
+       title = "CREs in local area",
 
        shiny::sidebarLayout(
          shiny::sidebarPanel(shiny::fileInput("extract_input_file", shiny::h3("File input:")),
@@ -91,7 +91,7 @@ NetLCPGUI = function(){
      ## Regulation visualization
      ###############################################
      shiny::tabPanel(
-       title = "Regulation visualization",
+       title = "CREs visualization",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::sliderInput("PR_node_degree", label = shiny::h3("Node Degree"), min = 0, max = 100, value = 0),
@@ -114,7 +114,7 @@ NetLCPGUI = function(){
      ## Elements eQTLs regulation
      ###############################################
      shiny::tabPanel(
-       title = "Elements eQTLs",
+       title = "CREs eQTLs",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::sliderInput("ER_node_degree", shiny::h3("Node Degree"), min = 0, max = 200, value = 0),
@@ -141,7 +141,7 @@ NetLCPGUI = function(){
      ## Binding variants regulation
      ###############################################
      shiny::tabPanel(
-       title = "Binding sites variants",
+       title = "CREs Variant 'switches'",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by a group of element IDs"), value = NULL),

@@ -4,7 +4,7 @@
       "NetLCP,
 More information can be found at https://github.com/rmyhandsome/NetLCP
 If you use NetLCP in you publication, please cite this publication:
-NetLCP: An R package for customizing prioritization of regulatory elements in heterogeneous network with variant 'switch' detection
+NetLCP: An R package for prioritizing combinations of regulatory elements in the heterogeneous network with variant ‘switches’ detection
 Authors: MingYu Ran (rmyhandsome@163.com)
 Maintainer: MingYu Ran."
     )

@@ -1,0 +1,370 @@
+Symbol	Type	Trans_ID
+AKT1	cellular senescence	207
+ATF2	cellular senescence	1386
+BDNF	cellular senescence	627
+CDK1	cellular senescence	983
+CDKN2A	cellular senescence	1029
+CLU	cellular senescence	1191
+CYCS	cellular senescence	54205
+EGF	cellular senescence	1950
+EGFR	cellular senescence	1956
+EGR1	cellular senescence	1958
+EPOR	cellular senescence	2057
+FOS	cellular senescence	2353
+GH1	cellular senescence	2688
+HDAC2	cellular senescence	3066
+HRAS	cellular senescence	3265
+IGF1	cellular senescence	3479
+IGF2	cellular senescence	3481
+IGFBP3	cellular senescence	3486
+IL2	cellular senescence	3558
+IL7	cellular senescence	3574
+IL7R	cellular senescence	3575
+INS	cellular senescence	3630
+INSR	cellular senescence	3643
+IRS1	cellular senescence	3667
+IRS2	cellular senescence	8660
+JUND	cellular senescence	3727
+LMNB1	cellular senescence	4001
+MAP3K5	cellular senescence	4217
+MAX	cellular senescence	4149
+MDM2	cellular senescence	4193
+MXD1	cellular senescence	4084
+MYC	cellular senescence	4609
+NCOR1	cellular senescence	9611
+NGF	cellular senescence	4803
+NGFR	cellular senescence	4804
+NRG1	cellular senescence	3084
+PDGFB	cellular senescence	5155
+PIK3CB	cellular senescence	5291
+PIN1	cellular senescence	5300
+PML	cellular senescence	5371
+PRKCD	cellular senescence	5580
+PSEN1	cellular senescence	5663
+PTEN	cellular senescence	5728
+PTK2B	cellular senescence	2185
+SERPINE1	cellular senescence	5054
+SIN3A	cellular senescence	25942
+SOD1	cellular senescence	6647
+STAT3	cellular senescence	6774
+STAT5A	cellular senescence	6776
+STAT5B	cellular senescence	6777
+STK11	cellular senescence	6794
+TAF1	cellular senescence	6872
+TCF3	cellular senescence	6929
+TFDP1	cellular senescence	7027
+TOP2A	cellular senescence	7153
+hsa-miR-125b-5p	Reference	MIMAT0000423
+hsa-miR-146a	Reference	MIMAT0000449
+hsa-miR-146b	Reference	MIMAT0002809
+hsa-miR-335	Reference	MIMAT0000765
+hsa-miR-183	Reference	MIMAT0000261
+hsa-miR-9	Reference	MIMAT0000441
+hsa-miR-222	Reference	MIMAT0000279
+hsa-miR-152-3p	Reference	MIMAT0000438
+hsa-miR-187	Reference	MIMAT0000262
+hsa-miR-504-5p	Reference	MIMAT0002875
+hsa-miR-25	Reference	MIMAT0000081
+hsa-miR-30d	Reference	MIMAT0000245
+hsa-miR-192	Reference	MIMAT0000222
+hsa-miR-194	Reference	MIMAT0000460
+hsa-miR-215-5p	Reference	MIMAT0000272
+hsa-miR-605-5p	Reference	MIMAT0003273
+hsa-miR-34a	Reference	MIMAT0000255
+hsa-miR-22	Reference	MIMAT0000077
+hsa-miR-138	Reference	MIMAT0000430
+hsa-miR-217-5p	Reference	MIMAT0000274
+hsa-miR-181a	Reference	MIMAT0000256
+hsa-miR-29c	Reference	MIMAT0000681
+hsa-miR-195	Reference	MIMAT0000461
+hsa-miR-200c	Reference	MIMAT0000617
+hsa-miR-181b	Reference	MIMAT0000257
+hsa-miR-130b	Reference	MIMAT0000691
+hsa-miR-302a	Reference	MIMAT0000684
+hsa-miR-302b	Reference	MIMAT0000715
+hsa-miR-302c	Reference	MIMAT0000717
+hsa-miR-302d	Reference	MIMAT0000718
+hsa-miR-515-5p	Reference	MIMAT0002826
+hsa-miR-106b	Reference	MIMAT0000680
+hsa-miR-20a	Reference	MIMAT0000075
+hsa-miR-17	Reference	MIMAT0000070
+hsa-miR-208a-3p	Reference	MIMAT0000241
+hsa-miR-663	Reference	MIMAT0003326
+hsa-miR-519a	Reference	MIMAT0002869
+hsa-miR-24	Reference	MIMAT0000080
+hsa-miR-26b	Reference	MIMAT0000083
+hsa-miR-210-3p	Reference	MIMAT0000267
+hsa-miR-424	Reference	MIMAT0001341
+hsa-miR-15b	Reference	MIMAT0000417
+hsa-miR-141	Reference	MIMAT0000432
+hsa-let-7a	Reference	MIMAT0000062
+hsa-miR-30a	Reference	MIMAT0000087
+hsa-miR-203a	Reference	MIMAT0000264
+hsa-miR-205	Reference	MIMAT0000266
+hsa-miR-449	Reference	MIMAT0001541
+ACLY	cellular senescence	47
+AAK1	cellular senescence	22848
+ABI3	cellular senescence	51225
+ADCK5	cellular senescence	203054
+AKR1B1	cellular senescence	231
+AGT	cellular senescence	183
+ALOX15B	cellular senescence	247
+AR	cellular senescence	367
+ARPC1B	cellular senescence	10095
+ASF1A	cellular senescence	25842
+ASPH	cellular senescence	444
+ATF7IP	cellular senescence	55729
+ATM	cellular senescence	472
+AURKA	cellular senescence	6790
+AXL	cellular senescence	558
+BAG3	cellular senescence	9531
+BHLHE40	cellular senescence	8553
+BCL6	cellular senescence	604
+BLK	cellular senescence	640
+BLVRA	cellular senescence	644
+BMI1	cellular senescence	648
+BRAF	cellular senescence	673
+BRD7	cellular senescence	29117
+BRCA1	cellular senescence	672
+BTG3	cellular senescence	10950
+C11orf31	cellular senescence	280636
+CAV1	cellular senescence	857
+CBX7	cellular senescence	23492
+CBX8	cellular senescence	57332
+CCND1	cellular senescence	595
+CDK18	cellular senescence	5129
+CDK2AP1	cellular senescence	8099
+CDK6	cellular senescence	1021
+CDK4	cellular senescence	1019
+CDKN1A	cellular senescence	1026
+CDKN1C	cellular senescence	1028
+CDKN1B	cellular senescence	1027
+CDKN2AIP	cellular senescence	55602
+CDKN2B	cellular senescence	1030
+CENPA	cellular senescence	1058
+CEBPB	cellular senescence	1051
+CHEK1	cellular senescence	1111
+CKB	cellular senescence	1152
+CPEB1	cellular senescence	64506
+CSNK1A1	cellular senescence	1452
+CTNNAL1	cellular senescence	8727
+CSNK2A1	cellular senescence	1457
+CXCL1	cellular senescence	2919
+DDB2	cellular senescence	1643
+CYR61	cellular senescence	3491
+DEK	cellular senescence	7913
+DGCR8	cellular senescence	54487
+DHCR24	cellular senescence	1718
+DLX2	cellular senescence	1746
+DHX9	cellular senescence	1660
+DPY30	cellular senescence	84661
+DUSP3	cellular senescence	1845
+DUSP16	cellular senescence	80824
+E2F1	cellular senescence	1869
+EHF	cellular senescence	26298
+ENDOG	cellular senescence	2021
+EPHA3	cellular senescence	2042
+ERRFI1	cellular senescence	54206
+ETS1	cellular senescence	2113
+ETS2	cellular senescence	2114
+EWSR1	cellular senescence	2130
+FASTK	cellular senescence	10922
+EZH2	cellular senescence	2146
+FBXO31	cellular senescence	79791
+FOXM1	cellular senescence	2305
+FOXO3	cellular senescence	2309
+FXR1	cellular senescence	8087
+G6PD	cellular senescence	2539
+GAPDH	cellular senescence	2597
+GKN1	cellular senescence	56287
+GATA4	cellular senescence	2626
+GNG11	cellular senescence	2791
+GLB1	cellular senescence	2720
+GRK6	cellular senescence	2870
+HDAC4	cellular senescence	9759
+HDAC1	cellular senescence	3065
+HEPACAM	cellular senescence	220296
+HJURP	cellular senescence	55355
+HIVEP1	cellular senescence	3096
+HK3	cellular senescence	3101
+HMGB1	cellular senescence	3146
+HSPA5	cellular senescence	3309
+HSPB2	cellular senescence	3316
+ID1	cellular senescence	3397
+ID4	cellular senescence	3400
+IGFBP1	cellular senescence	3484
+IFNG	cellular senescence	3458
+IGFBP6	cellular senescence	3489
+IGFBP5	cellular senescence	3488
+IL1A	cellular senescence	3552
+IL8	cellular senescence	3576
+ING1	cellular senescence	3621
+ING2	cellular senescence	3622
+IRF3	cellular senescence	3661
+IRF5	cellular senescence	3663
+IRF7	cellular senescence	3665
+ITPK1	cellular senescence	3705
+ITGB4	cellular senescence	3691
+ITPKB	cellular senescence	3707
+ITSN2	cellular senescence	50618
+KCNJ12	cellular senescence	3768
+KDM4A	cellular senescence	9682
+KDM5B	cellular senescence	10765
+KIAA1524	cellular senescence	57650
+KL	cellular senescence	9365
+KSR2	cellular senescence	283455
+LATS1	cellular senescence	9113
+LEO1	cellular senescence	123169
+LGALS3	cellular senescence	3958
+LIMA1	cellular senescence	51474
+LIMK1	cellular senescence	3984
+MAGEA2	cellular senescence	4101
+MAGOH	cellular senescence	4116
+MAD2L1	cellular senescence	4085
+MAGOHB	cellular senescence	55110
+MAP2K1	cellular senescence	5604
+MAP2K3	cellular senescence	5606
+MAP2K2	cellular senescence	5605
+MAP2K6	cellular senescence	5608
+MAP3K6	cellular senescence	9064
+MAP2K7	cellular senescence	5609
+MAP4K1	cellular senescence	11184
+MAP3K7	cellular senescence	6885
+MAPK12	cellular senescence	6300
+MAPKAPK5	cellular senescence	8550
+5-Mar	cellular senescence	54708
+MAPK14	cellular senescence	1432
+MAST1	cellular senescence	22983
+MATK	cellular senescence	4145
+MCL1	cellular senescence	4170
+MDH1	cellular senescence	4190
+MCRS1	cellular senescence	10445
+MECP2	cellular senescence	4204
+MOB3A	cellular senescence	126308
+MMP9	cellular senescence	4318
+MORC3	cellular senescence	23515
+MORF4	cellular senescence	10934
+MXD4	cellular senescence	10608
+MVK	cellular senescence	4598
+MYLK	cellular senescence	4638
+NADK	cellular senescence	65220
+NANOG	cellular senescence	79923
+NDRG1	cellular senescence	10397
+NEK1	cellular senescence	4750
+NEK4	cellular senescence	6787
+NEK6	cellular senescence	10783
+NFE2L2	cellular senescence	4780
+NINJ1	cellular senescence	4814
+NOTCH3	cellular senescence	4854
+NOX4	cellular senescence	50507
+NR2E1	cellular senescence	7101
+NTN4	cellular senescence	59277
+NUAK1	cellular senescence	9891
+OTX2	cellular senescence	5015
+P3H1	cellular senescence	64175
+PATZ1	cellular senescence	23598
+PAK4	cellular senescence	10298
+PBRM1	cellular senescence	55193
+PCGF2	cellular senescence	7703
+PDCD10	cellular senescence	11235
+PDIK1L	cellular senescence	149420
+PDZD2	cellular senescence	23037
+PDPK1	cellular senescence	5170
+PEBP1	cellular senescence	5037
+PEX19	cellular senescence	5824
+PIAS4	cellular senescence	51588
+PIK3R5	cellular senescence	23533
+PIK3C2A	cellular senescence	5286
+PIM1	cellular senescence	5292
+PLA2R1	cellular senescence	22925
+PKM	cellular senescence	5315
+PNPT1	cellular senescence	87178
+PMVK	cellular senescence	10654
+POT1	cellular senescence	25913
+POU5F1	cellular senescence	5460
+PPM1B	cellular senescence	5495
+PPM1D	cellular senescence	8493
+PRMT6	cellular senescence	55170
+PRKCH	cellular senescence	5583
+PROX1	cellular senescence	5629
+PRPF19	cellular senescence	27339
+PSMB5	cellular senescence	5693
+PTRF	cellular senescence	284119
+PTTG1	cellular senescence	9232
+PSMD14	cellular senescence	10213
+RAD21	cellular senescence	5885
+RAF1	cellular senescence	5894
+RB1	cellular senescence	5925
+RBP2	cellular senescence	5948
+RBX1	cellular senescence	9978
+RNASEL	cellular senescence	6041
+RPS6KA6	cellular senescence	27330
+RSL1D1	cellular senescence	26156
+RUNX1	cellular senescence	861
+RUVBL2	cellular senescence	10856
+SENP1	cellular senescence	29843
+SENP2	cellular senescence	59343
+SENP7	cellular senescence	57337
+SFN	cellular senescence	2810
+SIK1	cellular senescence	150094
+SGK1	cellular senescence	6446
+SIN3B	cellular senescence	23309
+SIRT1	cellular senescence	23411
+SIRT6	cellular senescence	51548
+SIX1	cellular senescence	6495
+SLC13A3	cellular senescence	64849
+SLC16A7	cellular senescence	9194
+SMARCA4	cellular senescence	6597
+SMG1	cellular senescence	23049
+SMARCB1	cellular senescence	6598
+SMURF2	cellular senescence	64750
+SNAI1	cellular senescence	6615
+SOCS1	cellular senescence	8651
+SORBS2	cellular senescence	8470
+SOX2	cellular senescence	6657
+SPIN1	cellular senescence	10927
+SOX5	cellular senescence	6660
+SP1	cellular senescence	6667
+SPOP	cellular senescence	8405
+SRC	cellular senescence	6714
+SREBF1	cellular senescence	6720
+SRSF1	cellular senescence	6426
+STK32C	cellular senescence	282974
+STK40	cellular senescence	83931
+SUPT5H	cellular senescence	6829
+SYK	cellular senescence	6850
+TACC3	cellular senescence	10460
+TERC	cellular senescence	7012
+TBX2	cellular senescence	6909
+TERF2	cellular senescence	7014
+TERT	cellular senescence	7015
+TFAP4	cellular senescence	7023
+TGFB1I1	cellular senescence	7041
+TLR3	cellular senescence	7098
+TMSB4X	cellular senescence	7114
+TNFSF13	cellular senescence	8741
+TNFSF15	cellular senescence	9966
+TOP1	cellular senescence	7150
+TP63	cellular senescence	8626
+TPR	cellular senescence	7175
+TP53	cellular senescence	7157
+TRIM28	cellular senescence	10155
+TRPM8	cellular senescence	79054
+TXN	cellular senescence	7295
+TXNIP	cellular senescence	10628
+UBTD1	cellular senescence	80019
+TYK2	cellular senescence	7297
+VENTX	cellular senescence	27287
+USP1	cellular senescence	7398
+VEGFA	cellular senescence	7422
+WNT16	cellular senescence	51384
+WNT2	cellular senescence	7472
+WRN	cellular senescence	7486
+WT1	cellular senescence	7490
+XAF1	cellular senescence	54739
+WWP1	cellular senescence	11059
+YAP1	cellular senescence	10413
+YPEL3	cellular senescence	83719
+ZFP36	cellular senescence	7538
+ZMAT3	cellular senescence	64393
+ZNF148	cellular senescence	7707

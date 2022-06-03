@@ -8,11 +8,11 @@
 #' @examples
 #' BioRegElePrioritization(transcriptomeList = c("2309", "3838", "MIMAT0000255"), prioType = "KEGG", empiricalPvalue = FALSE)
 #' @export
-BioRegElePrioritization = function(transcriptomeList = NULL, prioType = c("circRNA", "lncRNA", "KEGG", "Reactome", "Wikipathway"), empiricalPvalue = FALSE){
+BioRegElePrioritization = function(transcriptomeList = NULL, prioType = NULL, empiricalPvalue = FALSE){
 
   warnings(FALSE)
 
-  if(!(prioType %in% c("circRNA", "lncRNA", "KEGG", "Reactome", "Wikipathway"))){
+  if(is.null(prioType) | length(prioType) != 1 | !(prioType %in% c("circRNA", "lncRNA", "KEGG", "Reactome", "Wikipathway"))){
     return("Please choose prioritization type from circRNA, lncRNA, KEGG, Reactome, Wikipathway")
   }
 
@@ -270,17 +270,17 @@ BioRegElePrioritization = function(transcriptomeList = NULL, prioType = c("circR
   }
 
   PredTransVecInfo = HNet[[2]][HNet[[2]]$NodeType == "predicting", ]
-  PredTransVecInfo$RiskScore = Pred_Risk_Score
+  PredTransVecInfo$FunScore = Pred_Risk_Score
   PredTransVecInfo = PredTransVecInfo %>% as.data.frame()
-  PredTransVecInfo = PredTransVecInfo[order(PredTransVecInfo$RiskScore, decreasing = T), ]
-  PredTransVecInfo$Ranking = rank(sort(PredTransVecInfo$RiskScore))
+  PredTransVecInfo = PredTransVecInfo[order(PredTransVecInfo$FunScore, decreasing = T), ]
+  PredTransVecInfo$Ranking = rank(sort(PredTransVecInfo$FunScore))
   OfficialName = OFFINAME
 
   PredTransVecInfo = dplyr::left_join(PredTransVecInfo, OfficialName, by = "NodeName")
   result = PredTransVecInfo
-  result$NorRiskScore = sapply(result$RiskScore, function(x){(x - mean(result$RiskScore)) / sd(result$RiskScore)})
-  result = result %>% filter(NorRiskScore >= 1)
-  result = result[,-c(2,3)]
+  result$FunScore = sapply(result$FunScore, function(x){(x - mean(result$FunScore)) / sd(result$FunScore)})
+  result = result %>% filter(FunScore >= 1)
+  result = result[,-c(2,4)]
   gc()
 
   print("Prioritization finished......")
@@ -294,7 +294,7 @@ BioRegElePrioritization = function(transcriptomeList = NULL, prioType = c("circR
 
     star_time = Sys.time()
 
-    random_result = data.frame(NodeName=NA, NodeType=NA, RiskScore=NA, Ranking=NA)
+    random_result = data.frame(NodeName=NA, NodeType=NA, FunScore=NA, Ranking=NA)
     miRNA_in_trans = sum(grepl("MIMAT", transcriptomeList))
     mRNA_in_trans = length(transcriptomeList) - miRNA_in_trans
 
@@ -341,10 +341,10 @@ BioRegElePrioritization = function(transcriptomeList = NULL, prioType = c("circR
       }
 
       PredTransVecInfo = HNet[[2]][HNet[[2]]$NodeType == "predicting", ]
-      PredTransVecInfo$RiskScore = Pred_Risk_Score
+      PredTransVecInfo$FunScore = Pred_Risk_Score
       PredTransVecInfo = PredTransVecInfo %>% as.data.frame()
-      PredTransVecInfo = PredTransVecInfo[order(PredTransVecInfo$RiskScore, decreasing = T), ]
-      PredTransVecInfo$Ranking = rank(sort(PredTransVecInfo$RiskScore))
+      PredTransVecInfo = PredTransVecInfo[order(PredTransVecInfo$FunScore, decreasing = T), ]
+      PredTransVecInfo$Ranking = rank(sort(PredTransVecInfo$FunScore))
 
 
       random_result = rbind(random_result, PredTransVecInfo)
@@ -362,9 +362,9 @@ BioRegElePrioritization = function(transcriptomeList = NULL, prioType = c("circR
     random_result = random_result[-1,]
 
     score_nor = sapply(result$NodeName, function(x){
-      random_score = random_result$RiskScore[which(random_result$NodeName == x)]
+      random_score = random_result$FunScore[which(random_result$NodeName == x)]
       random_score =  random_score[random_score < quantile(random_score)[4] * 4]
-      score_diff = pnorm((result$RiskScore[which(result$NodeName == x)] - mean(random_score) + log2(result$RiskScore[which(result$NodeName == x) + 1])) / sd(random_score), lower.tail = F)
+      score_diff = pnorm((result$FunScore[which(result$NodeName == x)] - mean(random_score) + log2(result$FunScore[which(result$NodeName == x) + 1])) / sd(random_score), lower.tail = F)
       return(score_diff)
     })
 

@@ -3,13 +3,13 @@
 #'
 #' @param regData standard out of the function binaryRegulation or multieleRegulation.
 #' @param filterDegree an integer for filtering the nodes.
-#' @param selectNode select a or a set of nodes to visualize in the network.
+#' @param selectCREs a vector of elements or CREs.
 #' @param netLayout the layout of network
 #'
 #' @examples
-#' regNetVis(regData = NULL, filterDegree = 20, selectNode = "9978", netLayout = "layout_in_circle")
+#' regNetVis(regData = NULL, filterDegree = 20, selectCREs = "9978", netLayout = "layout_in_circle")
 #' @export
-regNetVis = function(regData = NULL, filterDegree = 40, selectNode = NULL, netLayout = "layout_nicely"){
+regNetVis = function(regData = NULL, filterDegree = 40, selectCREs = NULL, netLayout = "layout_nicely"){
 
   if(is.null(regData)){
     return("Please input the valid regData......")
@@ -44,7 +44,7 @@ regNetVis = function(regData = NULL, filterDegree = 40, selectNode = NULL, netLa
     return(nodeInfo$id[nodeInfo$label == x])
   })
 
-  if(is.null(selectNode)){
+  if(is.null(selectCREs)){
     nodeFilter = nodeInfo$id[nodeInfo$value >= filterDegree]
     edgeInfo = edgeInfo[edgeInfo$from %in% nodeFilter & edgeInfo$to %in% nodeFilter,]
     nodeInfo = nodeInfo[nodeInfo$id %in% unique(c(edgeInfo$from, edgeInfo$to)),]
@@ -53,12 +53,21 @@ regNetVis = function(regData = NULL, filterDegree = 40, selectNode = NULL, netLa
     }
 
   }else{
-    if(length(selectNode) == 1){
-      nodeFilter = nodeInfo$id[nodeInfo$label %in% selectNode]
+
+    if(any(grepl("_", selectCREs))){
+      elements_all = c()
+      for(i in selectCREs){
+        elements_all = c(unlist(strsplit(i, "_")), elements_all)
+      }
+      selectCREs = unique(elements_all)
+    }
+
+    if(length(selectCREs) == 1){
+      nodeFilter = nodeInfo$id[nodeInfo$label %in% selectCREs]
       edgeInfo = edgeInfo[edgeInfo$from %in% nodeFilter | edgeInfo$to %in% nodeFilter,]
       nodeInfo = nodeInfo[nodeInfo$id %in% unique(c(edgeInfo$from, edgeInfo$to)),]
     }else{
-      nodeFilter = nodeInfo$id[nodeInfo$label %in% selectNode]
+      nodeFilter = nodeInfo$id[nodeInfo$label %in% selectCREs]
       edgeInfo = edgeInfo[edgeInfo$from %in% nodeFilter & edgeInfo$to %in% nodeFilter,]
       nodeInfo = nodeInfo[nodeInfo$id %in% unique(c(edgeInfo$from, edgeInfo$to)),]
     }

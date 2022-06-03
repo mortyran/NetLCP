@@ -5,7 +5,7 @@
 \arguments{
   \item{elmentList}{a vector consist of elements including circRNA, lncRNA, miRNA ,mRNA or KEGG/Reactome/Wikipathway pathway IDs.}
   \item{regulationType}{character string naming the types of CREs which can be located including "circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway".}
-  \item{allRegulation}{a logical value indicates locating all related CREs from the storage (TRUE) or internal CREs between input elements (FALSE).}
+  \item{allRegulation}{a logical value indicates exploring all related CREs from the storage (TRUE) or internal CREs between input elements (FALSE).}
 }
 \value{
 The dataframe of regulatory data with the colnames of Node1, Node2, Datasoure and RegulationType.

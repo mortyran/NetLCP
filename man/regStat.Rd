@@ -5,7 +5,7 @@
 \arguments{
   \item{regData}{the standard output of the function binaryRegulation or multieleRegulation.}
   \item{filterDegree}{an integer for filtering the nodes.}
-  \item{selectNode}{select a or a set of nodes to perform statistics.}
+  \item{selectCREs}{a vector of elements or CREs.}
 }
 \value{
  Elements of CREs statistics with barplot.

@@ -11,7 +11,7 @@ Maintainer: MingYu Ran."
     ,
     crayon::red(
       "
-Please read the tutorial in https://mortyran.github.io/NetLCP/ for data preparation before you use NetLCP."
+Please read the tutorial in https://mortyran.github.io/NetLCP/ for data preparation before using NetLCP."
     )
   )
 }

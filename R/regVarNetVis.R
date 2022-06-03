@@ -3,28 +3,37 @@
 #'
 #' @param regVar the standard out of the function regVarDetection.
 #' @param regulationType a character representing the CREs type, it should be "miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway" or "circRNA-miRNA-mRNA-pathway".
-#' @param selectNode select a set of nodes to visualize in the network.
+#' @param selectCREs a vector of elements or CREs.
 #'
 #' @examples
-#' regVarNetVis(regVar = regVar, regulationType = "miRNA-mRNA-pathway", selectNode = c("MIMAT0000717","6774", "hsa04550"))
+#' regVarNetVis(regVar = regVar, regulationType = "miRNA-mRNA-pathway", selectCREs = c("MIMAT0000717","6774", "hsa04550"))
 #' @export
-regVarNetVis = function(regVar = NULL, regulationType = c("miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway"), selectNode = NULL){
+regVarNetVis = function(regVar = NULL, regulationType = NULL, selectCREs = NULL){
 
-  if(is.null(regVar) | nrow(regVar) == 0){
+  if(is.null(regVar) | is.character(regVar)){
     return(NULL)
   }
-  if(!regulationType %in% c("miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway")){
+  if(is.null(regulationType) | !regulationType %in% c("miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway")){
     return("Please choose regulation type from miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA, circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA-pathway or circRNA-miRNA-mRNA-pathway")
   }
-  if(is.null(selectNode)){
-    return("selectNode is empty!")
+  if(is.null(selectCREs)){
+    return("selectCREs is empty!")
   }
+
+  if(any(grepl("_", selectCREs))){
+    elements_all = c()
+    for(i in selectCREs){
+      elements_all = c(unlist(strsplit(i, "_")), elements_all)
+    }
+    selectCREs = unique(elements_all)
+  }
+
 
   miRNAID = c()
   lnc_cirRNAID = c()
   pathwayID = c()
   mRNAID = c()
-  for(i in selectNode){
+  for(i in selectCREs){
     if(grepl("MIMAT", i)){
       miRNAID = append(miRNAID, i)
     }else if(grepl("ENSG", i) | grepl("hsa_circ", i)){

@@ -3,26 +3,35 @@
 #'
 #' @param regData the standard out of the function binaryRegulation or multieleRegulation.
 #' @param filterDegree an integer for filtering the nodes.
-#' @param selectNode select a or a set of nodes to perform statistics.
+#' @param selectCREs a vector of elements or CREs.
 #'
 #' @examples
 #' regStat(regData = NULL, filterDegree = 50)
 #' @export
-regStat = function(regData = NULL, filterDegree = 40, selectNode = NULL){
+regStat = function(regData = NULL, filterDegree = 40, selectCREs = NULL){
 
   if(is.null(regData)){
-    return("Please input the valid regData")
+    return("Please input the valid regData......")
   }
 
-  if(is.null(selectNode)){
+  if(is.null(selectCREs)){
     nodeInfo = data.frame(table(c(regData$node1, regData$node2)))
     nodeFilter = nodeInfo$Var1[nodeInfo$Freq >= filterDegree]
     regData = regData[regData$node1 %in% nodeFilter | regData$node2 %in% nodeFilter,]
   }else{
-    if(length(selectNode) == 1){
-      regData = regData[regData$node1 %in% selectNode | regData$node2 %in% selectNode,]
+
+    if(any(grepl("_", selectCREs))){
+      elements_all = c()
+      for(i in selectCREs){
+        elements_all = c(unlist(strsplit(i, "_")), elements_all)
+      }
+      selectCREs = unique(elements_all)
+    }
+
+    if(length(selectCREs) == 1){
+      regData = regData[regData$node1 %in% selectCREs | regData$node2 %in% selectCREs,]
     }else{
-      regData = regData[regData$node1 %in% selectNode & regData$node2 %in% selectNode,]
+      regData = regData[regData$node1 %in% selectCREs & regData$node2 %in% selectCREs,]
     }
   }
 

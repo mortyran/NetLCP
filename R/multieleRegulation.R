@@ -3,18 +3,18 @@
 #'
 #' @param elementList a vector consist of elements including circRNA, lncRNA, miRNA, mRNA IDs.
 #' @param regulationType character string naming the type of CREs including "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-pathway" and "circRNA-miRNA-pathway".
-#' @param allRegulation a logical value indicates locating all related CREs from the storage or internal CREs between input elements.
+#' @param allRegulation a logical value indicates exploring all related CREs from the storage or internal CREs between input elements.
 #'
 #' @examples
 #' multieleRegulation(elementList = c("2309", "3838", "ENSG00000259366", "MIMAT0000255"), regulationType = "lncRNA-miRNA-mRNA",  allRegulation = FALSE)
 #' @export
-multieleRegulation = function(elementList = NULL, regulationType = "lncRNA-miRNA-mRNA", allRegulation = FALSE) {
+multieleRegulation = function(elementList = NULL, regulationType = NULL, allRegulation = FALSE) {
 
   if(is.null(elementList)){
     return("Please enter at least one element......")
   }
 
-  if(!(regulationType %in% c("circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway", "miRNA-mRNA-pathway"))){
+  if(is.null(regulationType) | !(regulationType %in% c("circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway", "miRNA-mRNA-pathway"))){
     return("Please choose a regulation type from circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA-pathway, circRNA-miRNA-mRNA-pathway")
   }
   load(system.file("extdata", "netelements.rda", package = "NetLCP"))

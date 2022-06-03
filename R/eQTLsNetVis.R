@@ -4,28 +4,37 @@
 #' @param regData the standard out of the function binaryRegulationExtract or multieleRegulation.
 #' @param eQTLsData the standard out of the function eQTLsDetection.
 #' @param filterDegree an integer for filtering the nodes.
-#' @param selectNode select a or a set of nodes to visualize in the network.
-#' @param netLayout the layout of network
+#' @param selectCREs a vector of elements or CREs.
+#' @param netLayout layout of network, including "layout_in_circle" or "layout_nicely".
 #'
 #' @examples
-#' eQTLsNetVis(regData = NULL, eQTLsData = NULL, filterDegree = 100,selectNode = "MIMAT0000423",netLayout = "layout_in_circle")
+#' eQTLsNetVis(regData = NULL, eQTLsData = NULL, filterDegree = 100,selectCREs = "MIMAT0000423",netLayout = "layout_in_circle")
 #' @export
-eQTLsNetVis = function(regData = NULL, eQTLsData = NULL, filterDegree = 40, selectNode = NULL, netLayout = "layout_in_circle"){
+eQTLsNetVis = function(regData = NULL, eQTLsData = NULL, filterDegree = 40, selectCREs = NULL, netLayout = "layout_in_circle"){
 
   if(is.null(regData) | is.null(eQTLsData)){
     return("Please input the valid regData and eQTLsData......")
   }
 
   colnames(regData) = c("node1", "node2", "title", "group")
-  if(is.null(selectNode)){
+  if(is.null(selectCREs)){
     nodeInfo_temp = data.frame(table(c(regData$node1, regData$node2)))
     nodeFilter = nodeInfo_temp$Var1[nodeInfo_temp$Freq >= filterDegree]
     regData = regData[regData$node1 %in% nodeFilter & regData$node2 %in% nodeFilter,]
   }else{
-    if(length(selectNode) == 1){
-      regData = regData[regData$node1 %in% selectNode | regData$node2 %in% selectNode, ]
+
+    if(any(grepl("_", selectCREs))){
+      elements_all = c()
+      for(i in selectCREs){
+        elements_all = c(unlist(strsplit(i, "_")), elements_all)
+      }
+      selectCREs = unique(elements_all)
+    }
+
+    if(length(selectCREs) == 1){
+      regData = regData[regData$node1 %in% selectCREs | regData$node2 %in% selectCREs, ]
     }else{
-      regData = regData[regData$node1 %in% selectNode & regData$node2 %in% selectNode, ]
+      regData = regData[regData$node1 %in% selectCREs & regData$node2 %in% selectCREs, ]
     }
   }
 

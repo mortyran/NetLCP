@@ -3,18 +3,18 @@
 #'
 #' @param elementList a vector consist of elements including circRNA, lncRNA, miRNA ,mRNA or KEGG/Reactome/Wikipathway pathway IDs.
 #' @param regulationType character string naming the type of regulation which can be located including "circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway".
-#' @param allRegulation a logical value indicates locating all related CREs from the storage (TRUE) or internal CREs between input elements (FALSE).
+#' @param allRegulation a logical value indicates exploring all related CREs from the storage (TRUE) or internal CREs between input elements (FALSE).
 #'
 #' @examples
 #' binaryRegulation(elementList = c("2309", "3838", "MIMAT0000255"), regulationType = "miRNA-mRNA",  allRegulation = FALSE)
 #' @export
-binaryRegulation = function(elementList = NULL, regulationType = "miRNA-mRNA", allRegulation = FALSE) {
+binaryRegulation = function(elementList = NULL, regulationType = NULL, allRegulation = FALSE) {
 
   if(is.null(elementList)){
-    return("Please enter at least one element......")
+    return("Please enter elements......")
   }
 
-  if(!(regulationType %in% c("circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway"))){
+  if(is.null(regulationType) | !(regulationType %in% c("circRNA-miRNA", "lncRNA-miRNA", "lncRNA-mRNA", "miRNA-mRNA", "miRNA-pathway", "mRNA-pathway"))){
     return("Please choose a regulation type from circRNA-miRNA, lncRNA-miRNA, lncRNA-mRNA, miRNA-mRNA, miRNA-pathway, mRNA-pathway")
   }
   load(system.file("extdata", "netelements.rda", package = "NetLCP"))

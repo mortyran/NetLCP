@@ -14,5 +14,5 @@ Variant 'switches' Detection.
 Detect the Variant 'switches' in CREs.
 }
 \examples{
-regVarDetection(regVar = NULL, regulationType = "lncRNA-miRNA-mRNA", selectNode = sampleData)
+regVarDetection(regVar = NULL, regulationType = "lncRNA-miRNA-mRNA")
 }

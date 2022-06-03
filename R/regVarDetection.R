@@ -7,7 +7,7 @@
 #' @examples
 #' regVarDetection(regData = NULL)
 #' @export
-regVarDetection = function(regData = NULL, regulationType = c("miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway")){
+regVarDetection = function(regData = NULL, regulationType = NULL){
   if(is.null(regulationType) | !(regulationType %in% c("miRNA-mRNA", "miRNA-mRNA-pathway", "lncRNA-miRNA-mRNA", "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway"))){
     return("Please choose a regulation type from miRNA-mRNA, miRNA-mRNA-pathway, lncRNA-miRNA-mRNA, circRNA-miRNA-mRNA, lncRNA-miRNA-mRNA-pathway, circRNA-miRNA-mRNA-pathway")
   }
@@ -22,9 +22,9 @@ regVarDetection = function(regData = NULL, regulationType = c("miRNA-mRNA", "miR
   if(regulationType == "lncRNA-miRNA-mRNA" | regulationType == "circRNA-miRNA-mRNA"){
     all_node = unique(c(regData$node1, regData$node2))
     ce_var = CEREGVAR[(CEREGVAR$ceRNA %in% all_node) & (CEREGVAR$miRNA %in% all_node) & (CEREGVAR$mRNA %in% all_node), ]
-    ce_var$mim = paste(ce_var$miRNA, ce_var$mRNA, sep = "-")
+    ce_var$mim = paste(ce_var$miRNA, ce_var$mRNA, sep = "_")
     mim_var = MIMSNP[(MIMSNP$miRNAID %in% all_node) & (MIMSNP$geneID %in% all_node), ]
-    mim_var$mim = paste(mim_var$miRNAID, mim_var$geneID, sep = "-")
+    mim_var$mim = paste(mim_var$miRNAID, mim_var$geneID, sep = "_")
     ce_var = ce_var %>% dplyr::left_join(mim_var, by = "mim") %>% distinct() %>% na.omit()
     colnames(ce_var)[c(6,7,12,13)] = c("lncMutType", "Source1", "mimMutType", "Source2")
     if(nrow(ce_var) > 0){
@@ -36,10 +36,10 @@ regVarDetection = function(regData = NULL, regulationType = c("miRNA-mRNA", "miR
   }else if(regulationType == "lncRNA-miRNA-mRNA-pathway" | regulationType == "circRNA-miRNA-mRNA-pathway"){
     all_node = unique(c(regData$node1, regData$node2))
     ce_var = CEREGVAR[(CEREGVAR$ceRNA %in% all_node) & (CEREGVAR$miRNA %in% all_node) & (CEREGVAR$mRNA %in% all_node), ]
-    ce_var$mim = paste(ce_var$miRNA, ce_var$mRNA, sep = "-")
+    ce_var$mim = paste(ce_var$miRNA, ce_var$mRNA, sep = "_")
 
     mim_var = MIMSNP[(MIMSNP$miRNAID %in% all_node) & (MIMSNP$geneID %in% all_node), ]
-    mim_var$mim = paste(mim_var$miRNAID, mim_var$geneID, sep = "-")
+    mim_var$mim = paste(mim_var$miRNAID, mim_var$geneID, sep = "_")
 
     ce_var = ce_var %>% dplyr::left_join(mim_var, by = "mim") %>% dplyr::distinct() %>% na.omit()
     colnames(ce_var)[c(6,7,12,13)] = c("lncMutType", "Source1", "mimMutType", "Source2")

@@ -5,7 +5,7 @@
 \arguments{
   \item{elementList}{a vector consist of elements including circRNA, lncRNA, miRNA, mRNA or pathway IDs.}
   \item{regulationType}{character string naming the type of CREs including "circRNA-miRNA-mRNA", "lncRNA-miRNA-mRNA", "lncRNA-miRNA-pathway" and "circRNA-miRNA-pathway".}
-  \item{allRegulation}{a logical value indicates locating all related CREs from the storage or internal CREs between input elements.}
+  \item{allRegulation}{a logical value indicates exploring all related CREs from the storage or internal CREs between input elements.}
 }
 \value{
 The dataframe of regulatory data with the colnames of Node1, Node2, Datasoure and RegulationType.

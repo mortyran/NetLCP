@@ -1,5 +1,5 @@
 # NetLCP
-`NetLCP` is an R package for prioritizing combinations of regulatory elements in the heterogeneous network with variant 'switches' detection It has command mode and shiny-based GUI.
+`NetLCP` is an R package for prioritizing regulations in the heterogeneous network with genetic variant ‘switches’ detection. It has command mode and shiny-based GUI.
 ![workflow](https://github.com/mortyran/NetLCP/raw/main/Workflow.png)
 
 # Install

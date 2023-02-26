@@ -22,16 +22,16 @@ NetLCPGUI = function(){
       windowTitle = "NetLCP", #title for browser tab
       collapsible = TRUE, #tab panels collapse into menu in small screens
       ###############################################.
-      ## Highlighting elements
+      ## Highlighting biological entity
       ###############################################.
       shiny::tabPanel(
-        title = "Highlighting elements",
+        title = "Highlighting biological entities",
 
         shiny::sidebarLayout(
           shiny::sidebarPanel(shiny::fileInput("prioritization_input_file", shiny::h3("File input:")),
                               shiny::textAreaInput("prio_input_text", label = shiny::h3("EntrezID/miRBaseID"), value = NULL),
                               shiny::verbatimTextOutput("prio_input_judge"),
-                              shiny::radioButtons("prio_type", label = shiny::h3("Biological Elements"),
+                              shiny::radioButtons("prio_type", label = shiny::h3("Biological Entity"),
                                   choices = list("KEGG" = "KEGG", "Reactome" = "Reactome", "Wikipathway" = "Wikipathway", "LncRNA" = "lncRNA", "CircRNA" = "circRNA"),
                                   selected = "KEGG"),
                               # shiny::radioButtons("empirical_pval", label = shiny::h3("Empirical Pvalue"),
@@ -62,7 +62,7 @@ NetLCPGUI = function(){
 
        shiny::sidebarLayout(
          shiny::sidebarPanel(shiny::fileInput("extract_input_file", shiny::h3("File input:")),
-                             shiny::textAreaInput("extr_input_text", label = shiny::h3("Element ID"), value = NULL),
+                             shiny::textAreaInput("extr_input_text", label = shiny::h3("Biological entity ID"), value = NULL),
                              shiny::verbatimTextOutput("extract_input_judge"),
                              shiny::selectInput("reg_select", label = shiny::h3("Regulation Type"),
                                   choices = list("miRNA-mRNA" = "miRNA-mRNA", "circRNA-miRNA" = "circRNA-miRNA", "lncRNA-miRNA" = "lncRNA-miRNA",
@@ -71,7 +71,7 @@ NetLCPGUI = function(){
                                                  "mRNA-pathway" = "mRNA-pathway", "miRNA-mRNA-pathway" = "miRNA-mRNA-pathway",
                                                  "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway" = "circRNA-miRNA-mRNA-pathway")),
                              shiny::radioButtons("extract_range", label = shiny::h3("Range"),
-                                   choices = list("BERs between input elements" = "FALSE", "All associated BERs in storage" = "TRUE"),
+                                   choices = list("BERs between input biological entities" = "FALSE", "All associated BERs in storage" = "TRUE"),
                                    selected = "FALSE"),
                       shinyjs::useShinyjs(),
                       shiny::actionButton("extract_action", label = "Inspect", style = "position: relative; left: 83%;")),
@@ -98,7 +98,7 @@ NetLCPGUI = function(){
            shiny::radioButtons("PR_Net_layout", label = shiny::h3("Network Layout"),
                         choices = list("Circle" = "layout_in_circle", "Nicely" = "layout_nicely"),
                         selected = "layout_in_circle"),
-           shiny::textAreaInput("PR_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
+           shiny::textAreaInput("PR_filter_input_text", label = shiny::h3("Filter by biological entities or BERs"), value = NULL),
            shiny::actionButton("PR_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
@@ -111,7 +111,7 @@ NetLCPGUI = function(){
      ),
 
      ###############################################.
-     ## Elements eQTLs regulation
+     ## Entity eQTLs regulation
      ###############################################
      shiny::tabPanel(
        title = "Prioritizing BERs",
@@ -122,7 +122,7 @@ NetLCPGUI = function(){
            shiny::radioButtons("ER_Net_layout", label = shiny::h3("Network Layout"),
                         choices = list("Circle" = "layout_in_circle", "Nicely" = "layout_nicely"),
                         selected = "layout_in_circle"),
-           shiny::textAreaInput("ER_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
+           shiny::textAreaInput("ER_filter_input_text", label = shiny::h3("Filter by biological entities or BERs"), value = NULL),
            shiny::actionButton("ER_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
@@ -146,7 +146,7 @@ NetLCPGUI = function(){
        title = "Genetic Variant 'switches'",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
-           shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
+           shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by biological entities or BERs"), value = NULL),
            shiny::actionButton("BR_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
@@ -171,7 +171,7 @@ NetLCPGUI = function(){
                                  sep = '\t', header = FALSE,
                                  stringsAsFactors = FALSE)))
       output$prio_input_judge = shiny::renderText({
-        paste0("You should input at least 50 unique elements, now totally input ", length(c(prioInputFile$file_prio_input, unlist(strsplit(input$prio_input_text, "\\s+")))), " elements......")
+        paste0("You should input at least 50 unique biological entities, now totally input ", length(c(prioInputFile$file_prio_input, unlist(strsplit(input$prio_input_text, "\\s+")))), " biological entities......")
       })
 
     })
@@ -180,7 +180,7 @@ NetLCPGUI = function(){
 
       output$prio_input_judge = shiny::renderText({
 
-        paste0("You should input at least 50 unique elements, now totally input ", length(c(prioInputFile$file_prio_input, unlist(strsplit(input$prio_input_text, "\\s+")))), " elements......")
+        paste0("You should input at least 50 unique biological entities, now totally input ", length(c(prioInputFile$file_prio_input, unlist(strsplit(input$prio_input_text, "\\s+")))), " biological entities......")
       })
 
     })
@@ -254,7 +254,7 @@ NetLCPGUI = function(){
                                                                          sep = '\t', header = FALSE,
                                                                          stringsAsFactors = FALSE)))
       output$extract_input_judge = shiny::renderText({
-        paste0("now totally input ", length(c(ExtrInputFile$file_extract_input, unlist(strsplit(input$extr_input_text, "\\s+")))), " elements......")
+        paste0("now totally input ", length(c(ExtrInputFile$file_extract_input, unlist(strsplit(input$extr_input_text, "\\s+")))), " biological entities......")
       })
       shinyjs::enable('extract_action')
 
@@ -264,7 +264,7 @@ NetLCPGUI = function(){
 
       output$extract_input_judge = shiny::renderText({
 
-        paste0("now totally input ", length(c(ExtrInputFile$file_extract_input, unlist(strsplit(input$extr_input_text, "\\s+")))), " elements......")
+        paste0("now totally input ", length(c(ExtrInputFile$file_extract_input, unlist(strsplit(input$extr_input_text, "\\s+")))), " biological entities......")
       })
       shinyjs::enable('extract_action')
 
@@ -323,7 +323,7 @@ NetLCPGUI = function(){
             output$PR_stat = plotly::renderPlotly({regStat(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectCREs = NULL)})
             output$PR_net = visNetwork::renderVisNetwork({regNetVis(regData = Extr_output$output, filterDegree = input$PR_node_degree, selectCREs = NULL, netLayout = input$PR_Net_layout)})
 
-            ###### Elements eQTLs regulation ######
+            ###### Entity eQTLs regulation ######
             # Extr_output$output
             eqtls_out = shiny::reactiveValues(output = NULL)
             eqtls_out$output = eQTLsDetection(regData = Extr_output$output)

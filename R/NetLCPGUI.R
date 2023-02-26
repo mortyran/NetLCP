@@ -58,7 +58,7 @@ NetLCPGUI = function(){
      ## local Regulation
      ###############################################
      shiny::tabPanel(
-       title = "RCs in local area",
+       title = "BERs in local area",
 
        shiny::sidebarLayout(
          shiny::sidebarPanel(shiny::fileInput("extract_input_file", shiny::h3("File input:")),
@@ -71,7 +71,7 @@ NetLCPGUI = function(){
                                                  "mRNA-pathway" = "mRNA-pathway", "miRNA-mRNA-pathway" = "miRNA-mRNA-pathway",
                                                  "lncRNA-miRNA-mRNA-pathway", "circRNA-miRNA-mRNA-pathway" = "circRNA-miRNA-mRNA-pathway")),
                              shiny::radioButtons("extract_range", label = shiny::h3("Range"),
-                                   choices = list("RCs between input elements" = "FALSE", "All associated RCs in storage" = "TRUE"),
+                                   choices = list("BERs between input elements" = "FALSE", "All associated BERs in storage" = "TRUE"),
                                    selected = "FALSE"),
                       shinyjs::useShinyjs(),
                       shiny::actionButton("extract_action", label = "Inspect", style = "position: relative; left: 83%;")),
@@ -91,14 +91,14 @@ NetLCPGUI = function(){
      ## Regulation visualization
      ###############################################
      shiny::tabPanel(
-       title = "RCs visualization",
+       title = "BERs visualization",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::sliderInput("PR_node_degree", label = shiny::h3("Node Degree"), min = 0, max = 100, value = 0),
            shiny::radioButtons("PR_Net_layout", label = shiny::h3("Network Layout"),
                         choices = list("Circle" = "layout_in_circle", "Nicely" = "layout_nicely"),
                         selected = "layout_in_circle"),
-           shiny::textAreaInput("PR_filter_input_text", label = shiny::h3("Filter by elements or RCs"), value = NULL),
+           shiny::textAreaInput("PR_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
            shiny::actionButton("PR_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
@@ -114,15 +114,15 @@ NetLCPGUI = function(){
      ## Elements eQTLs regulation
      ###############################################
      shiny::tabPanel(
-       title = "Prioritizing RCs",
+       title = "Prioritizing BERs",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
            shiny::sliderInput("ER_node_degree", shiny::h3("Node Degree"), min = 0, max = 200, value = 0),
-           shiny::sliderInput("ER_top_RCs", shiny::h3("Top RCs"), min = 0, max = 200, value = 10),
+           shiny::sliderInput("ER_top_BERs", shiny::h3("Top BERs"), min = 0, max = 200, value = 10),
            shiny::radioButtons("ER_Net_layout", label = shiny::h3("Network Layout"),
                         choices = list("Circle" = "layout_in_circle", "Nicely" = "layout_nicely"),
                         selected = "layout_in_circle"),
-           shiny::textAreaInput("ER_filter_input_text", label = shiny::h3("Filter by elements or RCs"), value = NULL),
+           shiny::textAreaInput("ER_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
            shiny::actionButton("ER_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
@@ -134,7 +134,7 @@ NetLCPGUI = function(){
                                plotly::plotlyOutput("ER_stat_reg", width = "100%", height = "600px", inline = FALSE, reportTheme = TRUE)
                       )),
              shiny::tabPanel(title = "Network", visNetwork::visNetworkOutput("ER_net", width = "100%", height = "800px")),
-             shiny::tabPanel(title = "Prioritized RCs", shiny::br(), shiny::tableOutput("prioritizedreg_out"))
+             shiny::tabPanel(title = "Prioritized BERs", shiny::br(), shiny::tableOutput("prioritizedreg_out"))
            )
          )
        )
@@ -146,7 +146,7 @@ NetLCPGUI = function(){
        title = "Genetic Variant 'switches'",
        shiny::sidebarLayout(
          shiny::sidebarPanel(
-           shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by elements or RCs"), value = NULL),
+           shiny::textAreaInput("BR_filter_input_text", label = shiny::h3("Filter by elements or BERs"), value = NULL),
            shiny::actionButton("BR_filter_action", label = "Filter",style = "position: relative; left: 83%;")
          ),
          shiny::mainPanel(
